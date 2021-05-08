@@ -1,16 +1,20 @@
 require('dotenv').config();
 const express = require('express');
+
+// SETUP
 const app = express();
-const path = require('path');
 
-app.set('view engine', 'ejs');
-
+//MIDDLEWARE
 app.use(express.json());
-// app.use(express.static(path.join(__dirname, '../client/build')));
 
+//ROUTES
 const bigMacRouter = require('./bigMac/bigMacRouter');
-app.use('/', bigMacRouter);
+app.use('/api/bigMac', bigMacRouter);
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server listening on the port::${process.env.PORT}`);
+app.get('/', (req, res) => res.send('Hello world!'));
+
+// INIT
+const port = process.env.PORT || 3080;
+app.listen(port, () => {
+  console.log(`Server listening on the port::${port}`);
 });
