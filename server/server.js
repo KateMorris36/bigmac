@@ -1,10 +1,12 @@
 require('dotenv').config();
 const express = require('express');
+var cors = require('cors');
 
 // SETUP
 const app = express();
 
 //MIDDLEWARE
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 
 //ROUTES

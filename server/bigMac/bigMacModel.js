@@ -22,7 +22,7 @@ exports.getList = (location, listCount) => {
   const filteredBigMac = bigMac.filter(
     (element) => element.Country === location.country_name
   );
-  locationList.push(filteredBigMac);
+  locationList.push(filteredBigMac[0]);
 
   //Add Random Location to fill out the List, No Duplicates
   while (locationList.length < listCount) {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
 
@@ -8,7 +7,7 @@ class BigMac extends Component {
     super();
     this.state = {
       budget: '',
-      localResult: [],
+      localResult: {},
       CountryList: [],
     };
   }
@@ -18,13 +17,16 @@ class BigMac extends Component {
   };
 
   componentDidMount() {
+    console.log('componentDidMount');
     axios
       .get(`http://localhost:3080/api/bigMac`)
       .then((res) => {
+        console.log(res);
         this.setState({
-          localResult: res.data[0],
-          CountryList: res.data[0],
+          localResult: res.data.locationList[0],
+          CountryList: res.data.locationList,
         });
+        console.log(this.state.CountryList);
       })
       .catch((err) => {
         console.log('Error in BigMac!');
@@ -33,18 +35,6 @@ class BigMac extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-
-    axios
-      .get(`http://localhost:3080/api/bigMac?budget=${this.state.budget}`)
-      .then((res) => {
-        this.setState({
-          localResult: res.data[0],
-          CountryList: res.data[0],
-        });
-      })
-      .catch((err) => {
-        console.log('Error in BigMac!');
-      });
   };
 
   render() {
@@ -53,7 +43,9 @@ class BigMac extends Component {
         <div className="UserInfo container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">You are in [COUNTRY]</h1>
+              <h1 className="display-4 text-center">
+                You are in {this.state.localResult.Country}
+              </h1>
               <p className="lead text-center">
                 Please enter an amount of money in your local
               </p>
