@@ -3,7 +3,7 @@ const ipVigilante = require('../interface/ipVigilante');
 const bigMacModel = require('./bigMacModel');
 
 exports.getBigMac = async (req, res, next) => {
-  //const locationList = bigMacModel(location,x)
+  //const locationList = bigMacModel.getList(location,x)
   // if (budget sent)
   // present the number of hamburgers/budget
   // foreach (add element with result of math)

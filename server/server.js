@@ -6,7 +6,7 @@ const path = require('path');
 app.set('view engine', 'ejs');
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../client/build')));
+// app.use(express.static(path.join(__dirname, '../client/build')));
 
 const bigMacRouter = require('./bigMac/bigMacRouter');
 app.use('/', bigMacRouter);
