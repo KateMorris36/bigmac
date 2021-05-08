@@ -1,4 +1,0 @@
-
-TODO: Canvasjs.com for React Charts
-TODO: Unit Testing
-TODO: Better input for budget (slider?)

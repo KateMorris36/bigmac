@@ -17,7 +17,7 @@ describe('## Big Mack API Tests', () => {
         .expect(httpStatus.OK)
         .then((res) => {
           expect(res.body.locationList).to.exist;
-          expect(res.body.locationList.length).to.equal(10);
+          expect(res.body.locationList.length).to.equal(2);
         });
     });
   });
