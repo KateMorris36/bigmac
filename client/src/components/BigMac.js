@@ -25,14 +25,8 @@ class BigMac extends Component {
           randomCountry: res.data.locationList[1],
         });
       })
-      .catch((err) => {
-        console.log('Error in BigMac!');
-      });
+      .catch((err) => {});
   }
-
-  onSubmit = (e) => {
-    e.preventDefault();
-  };
 
   render() {
     return (

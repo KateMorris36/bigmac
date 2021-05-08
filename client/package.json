@@ -1,5 +1,8 @@
 {
   "name": "bigmac-client",
+  "jest": {
+    "coveragePathIgnorePatterns": ["/node_modules/","index.js"]
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,7 +14,6 @@
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "recharts": "^2.0.9",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
