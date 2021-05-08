@@ -8,7 +8,7 @@ class BigMac extends Component {
     this.state = {
       budget: '50',
       localResult: {},
-      CountryList: [],
+      randomCountry: {},
     };
   }
 
@@ -22,7 +22,7 @@ class BigMac extends Component {
       .then((res) => {
         this.setState({
           localResult: res.data.locationList[0],
-          CountryList: res.data.locationList,
+          randomCountry: res.data.locationList[1],
         });
       })
       .catch((err) => {
@@ -37,86 +37,72 @@ class BigMac extends Component {
   render() {
     return (
       <div className="BigMac">
-        <div className="UserInfo container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">
-                You are in {this.state.localResult.Country}
-              </h1>
-              <p className="lead text-center">
-                Please enter an amount of money in your local currency
-              </p>
-
-              <input
-                type="text"
-                placeholder="Total Big Mac Budget"
-                name="budget"
-                className="form-control"
-                value={this.state.budget}
-                onChange={this.onChange}
-              />
-            </div>
-          </div>
-        </div>
         <br />
-        <div className="LocalInfo container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">
-                You could buy{' '}
-                {Math.floor(
-                  parseInt(this.state.budget) /
-                    parseFloat(this.state.localResult['Local price'])
-                )}{' '}
-                Big Macs in your country with {this.state.budget}
-              </h1>
-              <h1 className="display-4 text-center">
-                Your Dollar Purchasing Parity (PPP) is{' '}
-                {this.state.localResult['Dollar PPP']}
-              </h1>
+        <div className="row">
+          <div className="col-md-6 m-auto">
+            <div className="LocalInfo container">
+              <div className="row">
+                <div className="col-md-12 m-auto">
+                  <h1 className="display-1 text-left">
+                    {this.state.localResult.Country}
+                  </h1>
+                  <h1 className="display-4 text-left">
+                    Big Macs with Budget:{' '}
+                    {Math.floor(
+                      parseInt(this.state.budget) /
+                        parseFloat(this.state.localResult['Local price'])
+                    )}{' '}
+                  </h1>
+                  <h1 className="display-4 text-left">
+                    Dollar Purchasing Parity (PPP):{' '}
+                    {this.state.localResult['Dollar PPP']}
+                  </h1>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <br />
-        <div className="RandomComparison container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">
-                Random Country:{' '}
-                {this.state.CountryList[1]
-                  ? this.state.CountryList[1].Country
-                  : 'Random Country'}
-              </h1>
-              <h1 className="display-4 text-center">
-                You could buy{' '}
-                {this.state.CountryList[1]
-                  ? Math.floor(
+            <br />
+            <div className="RandomComparison container">
+              <div className="row">
+                <div className="col-md-12 m-auto">
+                  <h1 className="display-2 text-left">
+                    {this.state.randomCountry.Country}
+                  </h1>
+                  <h1 className="display-4 text-left">
+                    Big Macs with Budget:{' '}
+                    {Math.floor(
                       ((parseInt(this.state.budget) /
                         parseFloat(this.state.localResult['Local price'])) *
                         parseFloat(this.state.localResult['Dollar price'])) /
-                        parseFloat(this.state.CountryList[1]['Dollar price'])
-                    )
-                  : 0}{' '}
-                of Big Macs in{' '}
-                {this.state.CountryList[1]
-                  ? this.state.CountryList[1].Country
-                  : 'Random Country'}{' '}
-                with {this.state.budget}!
-              </h1>
-              <h1 className="display-4 text-center">
-                Your {this.state.budget} is worth about{' '}
-                {this.state.CountryList[1]
-                  ? Math.floor(
+                        parseFloat(this.state.randomCountry['Dollar price'])
+                    )}
+                  </h1>
+                  <h1 className="display-4 text-left">
+                    Your {this.state.budget} is worth about{' '}
+                    {Math.floor(
                       (parseInt(this.state.budget) *
                         parseFloat(this.state.localResult['Dollar price'])) /
-                        parseFloat(this.state.CountryList[1]['Dollar price'])
-                    )
-                  : 0}{' '}
-                in{' '}
-                {this.state.CountryList[1]
-                  ? this.state.CountryList[1].Country
-                  : 'Random Country'}
-              </h1>
+                        parseFloat(this.state.randomCountry['Dollar price'])
+                    )}{' '}
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-4 m-auto">
+            <div className="UserInfo container">
+              <div className="row">
+                <label className="display-3" for="budget">
+                  Big Mac Budget
+                </label>
+                <input
+                  type="number"
+                  name="budget"
+                  className="form-control"
+                  value={this.state.budget}
+                  onChange={this.onChange}
+                />
+              </div>
             </div>
           </div>
         </div>
