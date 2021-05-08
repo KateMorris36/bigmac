@@ -6,7 +6,7 @@ class BigMac extends Component {
   constructor() {
     super();
     this.state = {
-      budget: '',
+      budget: '50',
       localResult: {},
       CountryList: [],
     };
@@ -17,16 +17,13 @@ class BigMac extends Component {
   };
 
   componentDidMount() {
-    console.log('componentDidMount');
     axios
       .get(`http://localhost:3080/api/bigMac`)
       .then((res) => {
-        console.log(res);
         this.setState({
           localResult: res.data.locationList[0],
           CountryList: res.data.locationList,
         });
-        console.log(this.state.CountryList);
       })
       .catch((err) => {
         console.log('Error in BigMac!');
@@ -47,53 +44,78 @@ class BigMac extends Component {
                 You are in {this.state.localResult.Country}
               </h1>
               <p className="lead text-center">
-                Please enter an amount of money in your local
+                Please enter an amount of money in your local currency
               </p>
 
-              <form noValidate onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    placeholder="Total Big Mac Budget"
-                    name="budget"
-                    className="form-control"
-                    value={this.state.budget}
-                    onChange={this.onChange}
-                  />
-                </div>
-                <br />
-
-                <input
-                  type="submit"
-                  className="btn btn-outline-warning btn-block mt-4"
-                />
-              </form>
+              <input
+                type="text"
+                placeholder="Total Big Mac Budget"
+                name="budget"
+                className="form-control"
+                value={this.state.budget}
+                onChange={this.onChange}
+              />
             </div>
           </div>
         </div>
+        <br />
         <div className="LocalInfo container">
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">
-                You could buy [#] of Big Macs in your country
+                You could buy{' '}
+                {Math.floor(
+                  parseInt(this.state.budget) /
+                    parseFloat(this.state.localResult['Local price'])
+                )}{' '}
+                Big Macs in your country with {this.state.budget}
               </h1>
               <h1 className="display-4 text-center">
-                Your Dollar Purchasing Parity (PPP) is [#]
+                Your Dollar Purchasing Parity (PPP) is{' '}
+                {this.state.localResult['Dollar PPP']}
               </h1>
             </div>
           </div>
         </div>
+        <br />
         <div className="RandomComparison container">
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">
-                Random Country: [RANDOM COUNTRY]
+                Random Country:{' '}
+                {this.state.CountryList[1]
+                  ? this.state.CountryList[1].Country
+                  : 'Random Country'}
               </h1>
               <h1 className="display-4 text-center">
-                You could buy [#] of Big Macs in [RAND COUNTRY] with [INPUT]!
+                You could buy{' '}
+                {this.state.CountryList[1]
+                  ? Math.floor(
+                      ((parseInt(this.state.budget) /
+                        parseFloat(this.state.localResult['Local price'])) *
+                        parseFloat(this.state.localResult['Dollar price'])) /
+                        parseFloat(this.state.CountryList[1]['Dollar price'])
+                    )
+                  : 0}{' '}
+                of Big Macs in{' '}
+                {this.state.CountryList[1]
+                  ? this.state.CountryList[1].Country
+                  : 'Random Country'}{' '}
+                with {this.state.budget}!
               </h1>
               <h1 className="display-4 text-center">
-                Your [INPUT] is worth about [#] in [RAND COUNTRY]
+                Your {this.state.budget} is worth about{' '}
+                {this.state.CountryList[1]
+                  ? Math.floor(
+                      (parseInt(this.state.budget) *
+                        parseFloat(this.state.localResult['Dollar price'])) /
+                        parseFloat(this.state.CountryList[1]['Dollar price'])
+                    )
+                  : 0}{' '}
+                in{' '}
+                {this.state.CountryList[1]
+                  ? this.state.CountryList[1].Country
+                  : 'Random Country'}
               </h1>
             </div>
           </div>
