@@ -10,7 +10,7 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 
 //ROUTES
-const bigMacRouter = require('./bigMac/bigMacRouter');
+const bigMacRouter = require('./src/bigMac/bigMacRouter');
 app.use('/api/bigMac', bigMacRouter);
 
 app.get('/', (req, res) => res.send('Hello world!'));
@@ -20,3 +20,5 @@ const port = process.env.PORT || 3080;
 app.listen(port, () => {
   console.log(`Server listening on the port::${port}`);
 });
+
+module.exports = app;

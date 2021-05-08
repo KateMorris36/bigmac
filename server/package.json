@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node server.bundle.js",
     "build": "webpack",
-    "dev": "nodemon ./server.js localhost 3080"
+    "dev": "nodemon ./server.js localhost 3080",
+    "test": "nyc mocha './src/**/*.test.js'"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -17,7 +18,13 @@
     "http-proxy-middleware": "^1.0.4"
   },
   "devDependencies": {
+    "chai": "^4.3.4",
+    "http-status": "^1.5.0",
+    "mocha": "^8.4.0",
     "nodemon": "^2.0.7",
+    "nyc": "^15.1.0",
+    "sinon": "^10.0.0",
+    "supertest": "^6.1.3",
     "webpack": "^4.43.0"
   }
 }
