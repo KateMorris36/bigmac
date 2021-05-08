@@ -1,8 +1,8 @@
 //TODO: import interface for ip lookup
-const ipVigilante = require('../interface/ipVigilante');
 const bigMacModel = require('./bigMacModel');
 
 exports.getBigMac = async (req, res, next) => {
+  console.log(res.data);
   //const locationList = bigMacModel.getList(location,x)
   // if (budget sent)
   // present the number of hamburgers/budget

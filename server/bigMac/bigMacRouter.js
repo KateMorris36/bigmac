@@ -1,9 +1,9 @@
 const express = require('express');
 const bigMacController = require('./bigMacController.js');
-const ipVigilante = require('../interface/ipVigilante');
+const ipStack = require('../interface/ipStack');
 
 const router = express.Router();
 
-router.route('/').get(ipVigilante.ipLookup, bigMacController.getBigMac); //TODO: add ip middleware function
+router.route('/').get(ipStack.ipLookup, bigMacController.getBigMac);
 
 module.exports = router;
