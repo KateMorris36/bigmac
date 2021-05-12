@@ -18,6 +18,9 @@ describe('## Big Mack API Tests', () => {
         .then((res) => {
           expect(res.body.locationList).to.exist;
           expect(res.body.locationList.length).to.equal(2);
+          // United States [0]
+          // !United States [1]
+          // Called twice ([1] != both)
         });
     });
   });
